@@ -3,17 +3,44 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
-import CustomButton from "../../components/CustomButton"
-import { Link } from "expo-router";
+import CustomButton from "../../components/CustomButton";
+import { Link, router } from "expo-router";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
+
 const SignIn = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {}
+  const submit = async () => {
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill all fields");
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await signIn(form.email, form.password);
+      //to do => set it to global state remember user had logged in
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLoggedIn(true);
+
+      router.replace("/home");
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -42,15 +69,26 @@ const SignIn = () => {
             otherStyles="mt-7"
           />
 
-          <CustomButton title="Sign In" containerStyle="mt-7" handlePress={{submit}} isLoading={isSubmitting}/>
-          
+          <CustomButton
+            title="Sign In"
+            containerStyle="mt-7"
+            handlePress={submit}
+            isLoading={isSubmitting}
+          />
+
           <View className="justify-center pt-5 flex-row gap-2">
-             <Text className="text-lg text-gray-100 font-pregular"> Don't have an account?</Text>
-             <Link href="/sign-up" className="text-lg text-secondary font-psemibold">Sign Up</Link>
+            <Text className="text-lg text-gray-100 font-pregular">
+              {" "}
+              Don't have an account?
+            </Text>
+            <Link
+              href="/sign-up"
+              className="text-lg text-secondary font-psemibold"
+            >
+              Sign Up
+            </Link>
           </View>
         </View>
-
-
       </ScrollView>
     </SafeAreaView>
   );
