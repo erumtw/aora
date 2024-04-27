@@ -8,23 +8,26 @@ import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
   const { isLoading, isLoggedIn } = useGlobalContext();
-  if (!isLoading && isLoggedIn) {
-    return <Redirect href="/home" />;
-  }
+
+  if (isLoggedIn) return <Redirect href="/home" />;
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View className="w-full min-h-[85vh] items-center justify-start px-4">
+
           <Image
             source={images.logo}
             className="w-[130px] h-[84px]"
             resizeMode="contain"
           />
+          
           <Image
             source={images.cards}
             className="w-[375px] h-[298px]"
             resizeMode="contain"
           />
+
           <View className="relative mt-5">
             <Text className="text-3xl text-white font-bold text-center">
               Discover Endless Possibilities with{" "}

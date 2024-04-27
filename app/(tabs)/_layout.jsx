@@ -3,6 +3,7 @@ import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
+import { useGlobalContext } from "../../context/GlobalProvider";
 // import { Loader } from "../../components";
 // import { useGlobalContext } from "../../context/GlobalProvider";
 
@@ -26,20 +27,23 @@ const TabIcon = ({ icon, color, name, focused }) => {
 };
 
 const TabLayout = () => {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoggedIn) return <Redirect href="/sign-in" />;
 
   return (
     <>
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: '#FFA001',
-          tabBarInactiveTintColor: '#CDCDE0',
+          tabBarActiveTintColor: "#FFA001",
+          tabBarInactiveTintColor: "#CDCDE0",
           tabBarStyle: {
-            backgroundColor: '#161622',
+            backgroundColor: "#161622",
             borderTopWidth: 1,
-            borderTopColor: '#232533',
+            borderTopColor: "#232533",
             height: 84,
-          }
+          },
         }}
       >
         <Tabs.Screen
@@ -72,6 +76,23 @@ const TabLayout = () => {
             ),
           }}
         />
+
+        <Tabs.Screen
+          name="bookmark"
+          options={{
+            title: "Bookmark",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icons.bookmark}
+                color={color}
+                name="Bookmark"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+
         <Tabs.Screen
           name="profile"
           options={{
@@ -82,21 +103,6 @@ const TabLayout = () => {
                 icon={icons.profile}
                 color={color}
                 name="Profile"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="bookmark"
-          options={{
-            title: "Saved",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.bookmark}
-                color={color}
-                name="Saved"
                 focused={focused}
               />
             ),

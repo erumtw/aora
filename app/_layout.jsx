@@ -25,6 +25,7 @@ const RootLayout = () => {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
+  if (!fontsLoaded) return null;
   if (!fontsLoaded && !error) return null;
 
   return (
@@ -40,12 +41,3 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({
-  conatiner: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
