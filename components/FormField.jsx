@@ -4,7 +4,7 @@ import { icons } from "../constants";
 
 const FormField = ({
   title,
-  vlaue,
+  value,
   placeholder,
   handleChangeText,
   otherStyles,
@@ -20,7 +20,7 @@ const FormField = ({
       <View className="w-full h-16 px-4 bg-black-100 border-2 border-black-200 rounded-2xl focus:border-secondary items-center flex-row">
         <TextInput
           className="flex-1 text-white font-psemibold text-base"
-          value={vlaue}
+          value={value}
           placeholder={placeholder}
           placeholderTextColor="#7b7b8b"
           onChangeText={handleChangeText}
