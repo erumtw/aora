@@ -21,6 +21,7 @@ import VideoCard from "../../components/VideoCard";
 const Home = () => {
   const { data: posts, reFetch } = useAppwrite(getAllPosts);
   const { data: lastestPosts} = useAppwrite(getLastestPosts);
+  // console.log(lastestPosts)
   // const { user } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {

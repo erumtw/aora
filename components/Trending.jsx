@@ -30,7 +30,7 @@ const zoomOut = {
 
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
-
+  // console.log({item})
   return (
     <Animatable.View
       className="mr-5"
@@ -57,15 +57,15 @@ const TrendingItem = ({ activeItem, item }) => {
           onPress={() => setPlay(true)}
         >
           <ImageBackground
-            source={{ uri: item.thumnail }}
-            className="w-52 h-72 rounded-[35px] my-5 overflow-hidden shadow-lg shadow-black/40 border-2 border-secondary"
+            source={{ uri: item.thumbnail }}
+            className="w-52 h-72 rounded-[35px] my-5 overflow-hidden shadow-lg shadow-black/40"
             resizeMode="cover"
-          />
+            />
           <Image
             source={icons.play}
             className="w-12 h-12 absolute"
             resizeMode="contain"
-          />
+            />
         </TouchableOpacity>
       )}
     </Animatable.View>
@@ -85,8 +85,9 @@ const Trending = ({ posts }) => {
     <FlatList
       horizontal
       data={posts}
-      keyExtractor={(item) => item.$id}
-      renderItem={({ item }) => (
+      keyExtractor={( item ) => item.$id}
+      renderItem={( {item} ) => (
+        // console.log({item}),
         <TrendingItem activeItem={activeItem} item={item} />
       )}
       onViewableItemsChanged={viewableItemsChanged}
