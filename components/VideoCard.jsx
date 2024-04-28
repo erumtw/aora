@@ -17,11 +17,11 @@ const VideoCard = ({
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1">
-          <View className="h-[46px] w-[46px] rounded-lg  justify-center items-center p-0.5">
+          <View className="h-[46px] w-[46px] rounded-lg  justify-center items-center border-2 border-secondary">
             <Image
               source={{uri: avartar}}
               resizeMode="cover"
-              className="w-full h-full rounded-lg"
+              className="w-full h-full rounded-[6px]" 
             />
           </View>
 

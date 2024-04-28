@@ -19,10 +19,10 @@ import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
+  const { user } = useGlobalContext();
   const { data: posts, reFetch } = useAppwrite(getAllPosts);
   const { data: lastestPosts } = useAppwrite(getLastestPosts);
   // console.log(lastestPosts)
-  const { user } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -45,7 +45,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  {user.username}
+                  {user?.username}
                 </Text>
               </View>
 
