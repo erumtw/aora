@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import { icons } from "../constants";
+import { icons, images } from "../constants";
 import { Video, ResizeMode } from "expo-av";
 
 const VideoCard = ({
@@ -17,11 +17,11 @@ const VideoCard = ({
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1">
-          <View className="h-[46px] w-[46px] rounded-lg border-2 border-secondary justify-center items-center p-0.5">
+          <View className="h-[46px] w-[46px] rounded-lg  justify-center items-center p-0.5">
             <Image
-              source={{ uri: avartar }}
+              source={{uri: avartar}}
               resizeMode="cover"
-              className="w-full h-fill rounded-lg"
+              className="w-full h-full rounded-lg"
             />
           </View>
 

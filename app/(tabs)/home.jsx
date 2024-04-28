@@ -20,9 +20,9 @@ import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
   const { data: posts, reFetch } = useAppwrite(getAllPosts);
-  const { data: lastestPosts} = useAppwrite(getLastestPosts);
+  const { data: lastestPosts } = useAppwrite(getLastestPosts);
   // console.log(lastestPosts)
-  // const { user } = useGlobalContext();
+  const { user } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -41,11 +41,11 @@ const Home = () => {
           <View className="flex my-6 px-4 space-y-6">
             <View className="justify-between items-center flex-row mb-6">
               <View>
-                <Text className="font-pmedium text-sm text-gray-100">
+                <Text className="font-pmedium text-base text-gray-100">
                   Welcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  Username
+                  {user.username}
                 </Text>
               </View>
 
@@ -64,7 +64,7 @@ const Home = () => {
               <Text className="text-lg text-gray-100 font-pregular mb-3">
                 Lasted Videos
               </Text>
-              
+
               <Trending posts={lastestPosts ?? []} />
             </View>
           </View>
